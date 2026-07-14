@@ -1078,7 +1078,7 @@ function handleTestAnswer(btnEl, isCorrect) {
   if (isCorrect) { testCorrect++; } else { testMistakes++; }
   updateTestStatus();
 
-  const delay = isCorrect ? 1000 : 1500;
+  const delay = isCorrect ? 500 : 1500;
   setTimeout(() => {
     if (testMistakes >= TEST_MAX_MISTAKES) {
       finishTest("mistakes");
