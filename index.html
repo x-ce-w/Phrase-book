@@ -219,7 +219,7 @@
 
   .card-scene {
     perspective: 1200px;
-    height: 100px;
+    height: 150px;
   }
 
   .card {
@@ -239,7 +239,7 @@
     inset: 0;
     backface-visibility: hidden;
     border-radius: 8px;
-    padding: 9px 10px 7px;
+    padding: 12px 14px 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -258,8 +258,8 @@
   .face-front::before {
     content: '';
     position: absolute;
-    top: 7px; left: 7px;
-    width: 8px; height: 8px;
+    top: 8px; left: 8px;
+    width: 10px; height: 10px;
     border-radius: 50%;
     background: var(--navy);
     box-shadow: 0 0 0 2px var(--cream-dim), inset 0 1px 1px rgba(0,0,0,0.4);
@@ -268,7 +268,7 @@
   .tag-label {
     align-self: flex-end;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: rgba(27,42,65,0.4);
@@ -276,8 +276,8 @@
 
   .phrase-en {
     font-family: 'Fraunces', serif;
-    font-size: 0.82rem;
-    line-height: 1.2;
+    font-size: 1.23rem;
+    line-height: 1.25;
     margin-top: 10px;
     overflow: hidden;
     display: -webkit-box;
@@ -287,16 +287,16 @@
 
   .flip-hint {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.52rem;
+    font-size: 0.78rem;
     color: rgba(27,42,65,0.35);
     letter-spacing: 0.04em;
   }
 
   .fav-star {
     position: absolute;
-    bottom: 6px;
-    right: 8px;
-    font-size: 0.9rem;
+    bottom: 8px;
+    right: 10px;
+    font-size: 1.35rem;
     line-height: 1;
     color: rgba(27,42,65,0.22);
     cursor: pointer;
@@ -338,10 +338,10 @@
   .stamp-mark {
     align-self: flex-end;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 2px 6px;
+    padding: 3px 7px;
     border: 1px solid currentColor;
     border-radius: 3px;
   }
@@ -349,8 +349,8 @@
   .phrase-target {
     font-family: 'Fraunces', serif;
     font-style: italic;
-    font-size: 0.88rem;
-    line-height: 1.22;
+    font-size: 1.32rem;
+    line-height: 1.25;
     margin-top: 4px;
     overflow: hidden;
     display: -webkit-box;
@@ -360,8 +360,135 @@
 
   .back-en {
     font-family: 'Inter', sans-serif;
-    font-size: 0.56rem;
+    font-size: 0.84rem;
     color: rgba(244,236,216,0.4);
+  }
+
+  /* Test mode */
+  .test-area {
+    max-width: 480px;
+    margin: 34px auto 0;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .test-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    color: rgba(244,236,216,0.55);
+    margin-bottom: 14px;
+  }
+
+  .test-timerbar {
+    height: 5px;
+    background: rgba(244,236,216,0.12);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .test-timerbar-fill {
+    height: 100%;
+    width: 100%;
+    background: var(--brass);
+    transition: width 0.1s linear;
+  }
+
+  .test-timerbar-fill.low {
+    background: #C24545;
+  }
+
+  .test-prompt {
+    font-family: 'Fraunces', serif;
+    font-size: 1.85rem;
+    line-height: 1.28;
+    color: var(--cream);
+    margin-bottom: 30px;
+    min-height: 2.3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .test-answers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .test-answer-btn {
+    background: var(--cream);
+    color: var(--ink);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 18px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .test-answer-btn:hover:not(:disabled) {
+    border-color: var(--brass);
+  }
+
+  .test-answer-btn:disabled {
+    cursor: default;
+  }
+
+  .test-answer-btn.correct {
+    background: #3FA66A;
+    color: #fff;
+  }
+
+  .test-answer-btn.incorrect {
+    background: #C24545;
+    color: #fff;
+  }
+
+  .test-empty {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(244,236,216,0.5);
+    padding: 40px 10px;
+    line-height: 1.6;
+  }
+
+  .test-summary {
+    padding: 20px 10px 10px;
+  }
+
+  .test-summary-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .test-summary-stats {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(244,236,216,0.6);
+    margin-bottom: 24px;
+  }
+
+  .test-restart-btn {
+    background: var(--brass);
+    color: var(--navy-deep);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
   }
 
   footer {
@@ -405,12 +532,37 @@
       </div>
     </div>
   </div>
+
+  <div class="pronoun-row" id="testModeRow">
+    <div class="pronoun-group">
+      <span class="pronoun-label">Test mode</span>
+      <div class="pronoun-pair" id="testModeToggle">
+        <button class="pronoun-btn active" data-test="off">Off</button>
+        <button class="pronoun-btn" data-test="on">On</button>
+      </div>
+    </div>
+    <div class="pronoun-group" id="testDirectionGroup" style="display:none;">
+      <span class="pronoun-label">Direction</span>
+      <div class="pronoun-pair" id="testDirectionToggle">
+        <button class="pronoun-btn active" data-dir="en-first">EN → IT</button>
+        <button class="pronoun-btn" data-dir="lang-first">IT → EN</button>
+      </div>
+    </div>
+  </div>
 </header>
 
 <div class="categories" id="categories"></div>
 <div class="status-line" id="statusLine"></div>
 
 <div class="grid" id="grid"></div>
+
+<div class="test-area" id="testArea" style="display:none;">
+  <div class="test-status" id="testStatus"></div>
+  <div class="test-timerbar"><div class="test-timerbar-fill" id="testTimerFill"></div></div>
+  <div class="test-prompt" id="testPrompt"></div>
+  <div class="test-answers" id="testAnswers"></div>
+  <div class="test-summary" id="testSummary" style="display:none;"></div>
+</div>
 
 <footer>Fold at the border. Flip to check yourself.</footer>
 
@@ -624,6 +776,20 @@ let addresseeGender = "m";  // gender used for phrases that agree with the perso
 let flippedScene = null;    // the single card-scene currently showing its back
 let favorites = new Set();  // ids of starred cards
 
+// Test mode state
+let testMode = false;
+let testDirection = "en-first"; // "en-first" = English prompt, foreign answers; "lang-first" = reverse
+let testDeck = [];
+let testIndex = 0;
+let testMistakes = 0;
+let testCorrect = 0;
+let testTimerInterval = null;
+let testTimeLeft = 7;
+let testLocked = false;
+let testCurrentItem = null;
+const TEST_TIME_LIMIT = 7;
+const TEST_MAX_MISTAKES = 3;
+
 const FAV_STORAGE_KEY = "xa-phrasebook-favourites";
 
 function loadFavorites() {
@@ -664,6 +830,14 @@ function resolveField(item, field) {
   return "";
 }
 
+function currentFilteredList() {
+  return currentCat === "All"
+    ? DATA
+    : currentCat === "Favourites"
+      ? DATA.filter(d => favorites.has(d.id))
+      : DATA.filter(d => d.cat === currentCat);
+}
+
 function renderCategories() {
   const el = document.getElementById("categories");
   el.innerHTML = "";
@@ -671,7 +845,11 @@ function renderCategories() {
     const btn = document.createElement("button");
     btn.className = "cat-chip" + (cat === currentCat ? " active" : "");
     btn.textContent = cat;
-    btn.onclick = () => { currentCat = cat; renderCategories(); renderGrid(); };
+    btn.onclick = () => {
+      currentCat = cat;
+      renderCategories();
+      if (testMode) { startTest(); } else { renderGrid(); }
+    };
     el.appendChild(btn);
   });
 }
@@ -681,11 +859,7 @@ function renderGrid() {
   grid.innerHTML = "";
   flippedScene = null;
 
-  const filtered = currentCat === "All"
-    ? DATA
-    : currentCat === "Favourites"
-      ? DATA.filter(d => favorites.has(d.id))
-      : DATA.filter(d => d.cat === currentCat);
+  const filtered = currentFilteredList();
 
   document.getElementById("statusLine").textContent =
     `${filtered.length} card${filtered.length === 1 ? "" : "s"} · showing English ⇄ ${LANG_NAMES[currentLang]}`;
@@ -759,7 +933,8 @@ document.querySelectorAll(".lang-btn").forEach(btn => {
     document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     currentLang = btn.dataset.lang;
-    renderGrid();
+    updateTestDirectionLabels();
+    if (testMode) { startTest(); } else { renderGrid(); }
   });
 });
 
@@ -770,7 +945,7 @@ function wirePronounToggle(containerId, onChange) {
       container.querySelectorAll(".pronoun-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       onChange(btn.dataset.gender);
-      renderGrid();
+      if (testMode) { startTest(); } else { renderGrid(); }
     });
   });
 }
@@ -778,6 +953,215 @@ function wirePronounToggle(containerId, onChange) {
 wirePronounToggle("selfGenderToggle", g => selfGender = g);
 wirePronounToggle("addresseeGenderToggle", g => addresseeGender = g);
 
+// ---------- Test mode ----------
+
+function updateTestDirectionLabels() {
+  const code = currentLang.toUpperCase();
+  const enFirstBtn = document.querySelector('#testDirectionToggle [data-dir="en-first"]');
+  const langFirstBtn = document.querySelector('#testDirectionToggle [data-dir="lang-first"]');
+  if (enFirstBtn) enFirstBtn.textContent = `EN → ${code}`;
+  if (langFirstBtn) langFirstBtn.textContent = `${code} → EN`;
+}
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function testAnswerTextFor(item) {
+  // Resolves the text shown on an answer button for the given item,
+  // based on the current test direction.
+  return testDirection === "en-first" ? resolveField(item, currentLang) : item.en;
+}
+
+function testPromptTextFor(item) {
+  return testDirection === "en-first" ? item.en : resolveField(item, currentLang);
+}
+
+function pickWrongAnswers(correctItem, count) {
+  const correctText = testAnswerTextFor(correctItem);
+  const pool = shuffleArray(DATA.filter(d => d.id !== correctItem.id));
+  const chosen = [];
+  const seen = new Set([correctText]);
+  for (const cand of pool) {
+    const text = testAnswerTextFor(cand);
+    if (!text || seen.has(text)) continue;
+    seen.add(text);
+    chosen.push(text);
+    if (chosen.length === count) break;
+  }
+  return chosen;
+}
+
+function clearTestTimer() {
+  if (testTimerInterval) {
+    clearInterval(testTimerInterval);
+    testTimerInterval = null;
+  }
+}
+
+function updateTimerBar() {
+  const fill = document.getElementById("testTimerFill");
+  if (!fill) return;
+  const pct = Math.max(0, (testTimeLeft / TEST_TIME_LIMIT) * 100);
+  fill.style.width = pct + "%";
+  fill.classList.toggle("low", testTimeLeft <= 2);
+}
+
+function startTestTimer() {
+  clearTestTimer();
+  testTimeLeft = TEST_TIME_LIMIT;
+  updateTimerBar();
+  testTimerInterval = setInterval(() => {
+    testTimeLeft -= 0.1;
+    if (testTimeLeft <= 0) {
+      clearTestTimer();
+      updateTimerBar();
+      handleTestAnswer(null, false); // timeout counts as a miss
+    } else {
+      updateTimerBar();
+    }
+  }, 100);
+}
+
+function updateTestStatus() {
+  document.getElementById("testStatus").textContent =
+    `Card ${Math.min(testIndex + 1, testDeck.length)} of ${testDeck.length} · Mistakes ${testMistakes}/${TEST_MAX_MISTAKES}`;
+}
+
+function showTestQuestion() {
+  if (testIndex >= testDeck.length) {
+    finishTest("deck-complete");
+    return;
+  }
+
+  testCurrentItem = testDeck[testIndex];
+  testLocked = false;
+
+  const promptText = testPromptTextFor(testCurrentItem);
+  const correctText = testAnswerTextFor(testCurrentItem);
+  const wrongTexts = pickWrongAnswers(testCurrentItem, 3);
+  const options = shuffleArray([correctText, ...wrongTexts]);
+
+  document.getElementById("testPrompt").textContent = promptText;
+  updateTestStatus();
+
+  const answersEl = document.getElementById("testAnswers");
+  answersEl.innerHTML = "";
+  options.forEach(optText => {
+    const btn = document.createElement("button");
+    btn.className = "test-answer-btn";
+    btn.textContent = optText;
+    btn.dataset.correct = optText === correctText ? "1" : "0";
+    btn.onclick = () => handleTestAnswer(btn, optText === correctText);
+    answersEl.appendChild(btn);
+  });
+
+  startTestTimer();
+}
+
+function handleTestAnswer(btnEl, isCorrect) {
+  if (testLocked) return;
+  testLocked = true;
+  clearTestTimer();
+
+  document.querySelectorAll(".test-answer-btn").forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === "1") b.classList.add("correct");
+  });
+  if (btnEl && !isCorrect) btnEl.classList.add("incorrect");
+
+  if (isCorrect) { testCorrect++; } else { testMistakes++; }
+  updateTestStatus();
+
+  const delay = isCorrect ? 1000 : 1500;
+  setTimeout(() => {
+    if (testMistakes >= TEST_MAX_MISTAKES) {
+      finishTest("mistakes");
+      return;
+    }
+    testIndex++;
+    showTestQuestion();
+  }, delay);
+}
+
+function finishTest(reason) {
+  clearTestTimer();
+  document.getElementById("testAnswers").innerHTML = "";
+  document.getElementById("testPrompt").textContent = "";
+  document.getElementById("testTimerFill").style.width = "0%";
+
+  const attempted = testCorrect + testMistakes;
+  const summary = document.getElementById("testSummary");
+  summary.style.display = "block";
+  summary.innerHTML = `
+    <div class="test-summary-title">${reason === "deck-complete" ? "Deck complete!" : "Test ended"}</div>
+    <div class="test-summary-stats">${testCorrect} correct · ${testMistakes} mistake${testMistakes === 1 ? "" : "s"} · ${attempted} of ${testDeck.length} seen</div>
+    <button class="test-restart-btn" id="testRestartBtn">Try again</button>
+  `;
+  document.getElementById("testStatus").textContent = "";
+  document.getElementById("testRestartBtn").onclick = () => startTest();
+}
+
+function startTest() {
+  clearTestTimer();
+  const pool = currentFilteredList();
+  testDeck = shuffleArray(pool);
+  testIndex = 0;
+  testMistakes = 0;
+  testCorrect = 0;
+  testLocked = false;
+
+  document.getElementById("testSummary").style.display = "none";
+
+  if (testDeck.length === 0) {
+    document.getElementById("testStatus").textContent = "";
+    document.getElementById("testPrompt").textContent = "";
+    document.getElementById("testAnswers").innerHTML = "";
+    document.getElementById("testTimerFill").style.width = "0%";
+    const answersEl = document.getElementById("testAnswers");
+    answersEl.innerHTML = `<div class="test-empty">No cards in this category yet — pick another category to test.</div>`;
+    return;
+  }
+
+  showTestQuestion();
+}
+
+function setTestMode(on) {
+  testMode = on;
+  document.getElementById("testDirectionGroup").style.display = on ? "flex" : "none";
+  document.getElementById("grid").style.display = on ? "none" : "grid";
+  document.getElementById("statusLine").style.display = on ? "none" : "block";
+  document.getElementById("testArea").style.display = on ? "block" : "none";
+  if (on) {
+    startTest();
+  } else {
+    clearTestTimer();
+  }
+}
+
+document.querySelectorAll("#testModeToggle .pronoun-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#testModeToggle .pronoun-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    setTestMode(btn.dataset.test === "on");
+  });
+});
+
+document.querySelectorAll("#testDirectionToggle .pronoun-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#testDirectionToggle .pronoun-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    testDirection = btn.dataset.dir;
+    if (testMode) startTest();
+  });
+});
+
+updateTestDirectionLabels();
 loadFavorites();
 renderCategories();
 renderGrid();
