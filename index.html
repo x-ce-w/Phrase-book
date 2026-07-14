@@ -161,6 +161,33 @@
   }
   .lang-btn.active .dot { opacity: 1; }
 
+  .test-launch-btn {
+    background: transparent;
+    border: 1.5px solid var(--brass);
+    color: var(--brass-bright);
+    padding: 10px 20px;
+    min-width: 130px;
+    text-align: center;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .test-launch-btn:hover {
+    background: rgba(201,162,39,0.12);
+  }
+
+  .test-launch-btn.active {
+    background: var(--brass);
+    border-color: var(--brass);
+    color: var(--navy-deep);
+    font-weight: 600;
+  }
+
   /* Category chips */
   .categories {
     display: flex;
@@ -535,11 +562,7 @@
 
   <div class="pronoun-row" id="testModeRow">
     <div class="pronoun-group">
-      <span class="pronoun-label">Test mode</span>
-      <div class="pronoun-pair" id="testModeToggle">
-        <button class="pronoun-btn active" data-test="off">Off</button>
-        <button class="pronoun-btn" data-test="on">On</button>
-      </div>
+      <button class="test-launch-btn" id="testLaunchBtn">Test Mode</button>
     </div>
     <div class="pronoun-group" id="testDirectionGroup" style="display:none;">
       <span class="pronoun-label">Direction</span>
@@ -791,6 +814,7 @@ const TEST_TIME_LIMIT = 7;
 const TEST_MAX_MISTAKES = 3;
 
 const FAV_STORAGE_KEY = "xa-phrasebook-favourites";
+const LANG_STORAGE_KEY = "xa-phrasebook-lang";
 
 function loadFavorites() {
   try {
@@ -811,6 +835,25 @@ function saveFavorites() {
     localStorage.setItem(FAV_STORAGE_KEY, JSON.stringify([...favorites]));
   } catch (err) {
     console.warn("Couldn't save favourites:", err);
+  }
+}
+
+function loadLang() {
+  try {
+    const saved = localStorage.getItem(LANG_STORAGE_KEY);
+    if (saved && LANG_NAMES[saved]) {
+      currentLang = saved;
+    }
+  } catch (err) {
+    console.warn("Couldn't load saved language:", err);
+  }
+}
+
+function saveLang() {
+  try {
+    localStorage.setItem(LANG_STORAGE_KEY, currentLang);
+  } catch (err) {
+    console.warn("Couldn't save language:", err);
   }
 }
 
@@ -848,6 +891,7 @@ function renderCategories() {
     btn.onclick = () => {
       currentCat = cat;
       renderCategories();
+      updateTestLaunchLabel();
       if (testMode) { startTest(); } else { renderGrid(); }
     };
     el.appendChild(btn);
@@ -933,7 +977,9 @@ document.querySelectorAll(".lang-btn").forEach(btn => {
     document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     currentLang = btn.dataset.lang;
+    saveLang();
     updateTestDirectionLabels();
+    updateTestLaunchLabel();
     if (testMode) { startTest(); } else { renderGrid(); }
   });
 });
@@ -961,6 +1007,12 @@ function updateTestDirectionLabels() {
   const langFirstBtn = document.querySelector('#testDirectionToggle [data-dir="lang-first"]');
   if (enFirstBtn) enFirstBtn.textContent = `EN → ${code}`;
   if (langFirstBtn) langFirstBtn.textContent = `${code} → EN`;
+}
+
+function updateTestLaunchLabel() {
+  const btn = document.getElementById("testLaunchBtn");
+  if (!btn) return;
+  btn.classList.toggle("active", testMode);
 }
 
 function shuffleArray(arr) {
@@ -1137,6 +1189,7 @@ function setTestMode(on) {
   document.getElementById("grid").style.display = on ? "none" : "grid";
   document.getElementById("statusLine").style.display = on ? "none" : "block";
   document.getElementById("testArea").style.display = on ? "block" : "none";
+  updateTestLaunchLabel();
   if (on) {
     startTest();
   } else {
@@ -1144,12 +1197,8 @@ function setTestMode(on) {
   }
 }
 
-document.querySelectorAll("#testModeToggle .pronoun-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll("#testModeToggle .pronoun-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    setTestMode(btn.dataset.test === "on");
-  });
+document.getElementById("testLaunchBtn").addEventListener("click", () => {
+  setTestMode(!testMode);
 });
 
 document.querySelectorAll("#testDirectionToggle .pronoun-btn").forEach(btn => {
@@ -1161,7 +1210,12 @@ document.querySelectorAll("#testDirectionToggle .pronoun-btn").forEach(btn => {
   });
 });
 
+loadLang();
+document.querySelectorAll(".lang-btn").forEach(b => {
+  b.classList.toggle("active", b.dataset.lang === currentLang);
+});
 updateTestDirectionLabels();
+updateTestLaunchLabel();
 loadFavorites();
 renderCategories();
 renderGrid();
